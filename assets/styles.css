@@ -572,3 +572,102 @@ a:hover { color: var(--gold-soft); }
 }
 .trust svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
 
+/* ===================== FELIRATKOZÓ ŰRLAP (lead magnet) ===================== */
+.signup-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 500px;
+  margin-top: 32px;
+}
+.input {
+  flex: 1;
+  min-width: 220px;
+  padding: 16px 22px;
+  border-radius: var(--r-pill);
+  background: var(--glass-strong);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.input::placeholder { color: var(--faint); }
+.input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(232, 207, 154, 0.15);
+}
+.signup-form .btn-primary { flex-shrink: 0; }
+.form-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--faint);
+}
+.form-note svg { width: 15px; height: 15px; color: var(--gold); flex-shrink: 0; }
+.form-error {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  color: #ff9d9d;
+  min-height: 1.2em;
+}
+
+/* pipás lista */
+.checklist { display: grid; gap: 16px; margin-top: 8px; padding: 0; }
+.checklist li {
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+.checklist svg {
+  width: 22px; height: 22px;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.checklist strong { color: var(--ink); font-weight: 600; }
+
+/* "ingyenes" jelölő a borítón */
+.magnet-card { position: relative; }
+.magnet-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(115deg, var(--purple-deep), var(--purple));
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow: var(--glow-purple);
+}
+
+/* siker-állapot a feliratkozás után */
+.signup-success {
+  max-width: 500px;
+  margin-top: 24px;
+  padding: 32px;
+  background: var(--glass);
+  border: 1px solid var(--gold-line);
+  border-radius: var(--r-card);
+  backdrop-filter: blur(10px);
+}
+.signup-success .status-icon { width: 48px; height: 48px; margin: 0 0 16px; }
+.signup-success h3 {
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+.signup-success p { color: var(--muted); margin-bottom: 18px; }
+
+

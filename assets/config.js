@@ -14,4 +14,14 @@ window.VR_CONFIG = {
 
   // Az ebook címe — több helyen használjuk.
   BOOK_TITLE: "Valóság Rései",
+
+  // --- Lead magnet (ingyenes első fejezet) ---
+  // Ide jön majd a feliratkozást fogadó végpont. Amíg üres (""), az űrlap
+  // csak demózik (nem küld sehova), de a köszönő-állapotot megmutatja.
+  // Később pl.: WORKER_URL + "/api/subscribe" (MailerLite / saját Worker).
+  LEAD_ENDPOINT: "",
+
+  // Ha azonnali letöltést szeretnél a feliratkozás után, ide tedd az
+  // ingyenes fejezet linkjét. Ha üres, csak "nézd meg a postafiókod" üzenet jön.
+  FREE_CHAPTER_URL: "",
 };
