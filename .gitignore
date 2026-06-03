@@ -1,0 +1,15 @@
+# Node / Wrangler
+node_modules/
+worker/node_modules/
+.wrangler/
+.dev.vars
+*.log
+
+# A privát ebook SOHA ne kerüljön a repóba — R2-be töltsd fel!
+*.pdf
+*.epub
+assets/cover.jpg
+assets/cover.png
+
+# Rendszer
+.DS_Store

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Valóság Rései — álomszerű csillagköd">
+  <defs>
+    <linearGradient id="space" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0830"/>
+      <stop offset="55%" stop-color="#070421"/>
+      <stop offset="100%" stop-color="#030210"/>
+    </linearGradient>
+
+    <!-- köd-textúra szűrők: turbulencia → fény→alfa → szín -->
+    <filter id="cloudPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.010 0.013" numOctaves="5" seed="3" result="n"/>
+      <feColorMatrix in="n" type="luminanceToAlpha" result="a"/>
+      <feComponentTransfer in="a" result="a2"><feFuncA type="gamma" amplitude="1.7" exponent="2.4" offset="0"/></feComponentTransfer>
+      <feFlood flood-color="#9a83ff" result="c"/>
+      <feComposite in="c" in2="a2" operator="in" result="clouds"/>
+      <feGaussianBlur in="clouds" stdDeviation="2.5"/>
+    </filter>
+
+    <filter id="cloudRose" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.013 0.016" numOctaves="5" seed="14" result="n"/>
+      <feColorMatrix in="n" type="luminanceToAlpha" result="a"/>
+      <feComponentTransfer in="a" result="a2"><feFuncA type="gamma" amplitude="1.7" exponent="2.6" offset="0"/></feComponentTransfer>
+      <feFlood flood-color="#e79ad2" result="c"/>
+      <feComposite in="c" in2="a2" operator="in" result="clouds"/>
+      <feGaussianBlur in="clouds" stdDeviation="2.5"/>
+    </filter>
+
+    <filter id="cloudGold" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.011 0.015" numOctaves="5" seed="7" result="n"/>
+      <feColorMatrix in="n" type="luminanceToAlpha" result="a"/>
+      <feComponentTransfer in="a" result="a2"><feFuncA type="gamma" amplitude="1.6" exponent="2.6" offset="0"/></feComponentTransfer>
+      <feFlood flood-color="#ecd6a0" result="c"/>
+      <feComposite in="c" in2="a2" operator="in" result="clouds"/>
+      <feGaussianBlur in="clouds" stdDeviation="2.5"/>
+    </filter>
+
+    <!-- régió-maszkok, hogy a színek lágyan más-más helyen sűrűsödjenek -->
+    <radialGradient id="mP" cx="40%" cy="38%" r="48%">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#fff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mR" cx="58%" cy="55%" r="46%">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="55%" stop-color="#fff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mG" cx="66%" cy="70%" r="46%">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="55%" stop-color="#fff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="maskP"><rect width="600" height="800" fill="url(#mP)"/></mask>
+    <mask id="maskR"><rect width="600" height="800" fill="url(#mR)"/></mask>
+    <mask id="maskG"><rect width="600" height="800" fill="url(#mG)"/></mask>
+
+    <!-- finom fénymag -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.9"/>
+      <stop offset="30%" stop-color="#e7dcff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#9a83ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="starGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="800" fill="url(#space)"/>
+
+  <!-- álomszerű színes köd -->
+  <g style="mix-blend-mode:screen">
+    <g mask="url(#maskP)"><rect width="600" height="800" filter="url(#cloudPurple)" opacity="0.95"/></g>
+    <g mask="url(#maskR)"><rect width="600" height="800" filter="url(#cloudRose)" opacity="0.7"/></g>
+    <g mask="url(#maskG)"><rect width="600" height="800" filter="url(#cloudGold)" opacity="0.75"/></g>
+  </g>
+
+  <!-- lágy fénygócok -->
+  <circle cx="250" cy="320" r="150" fill="url(#glow)" opacity="0.5" style="mix-blend-mode:screen"/>
+  <circle cx="390" cy="520" r="120" fill="url(#glow)" opacity="0.35" style="mix-blend-mode:screen"/>
+
+  <!-- csillagmező -->
+  <g fill="#ffffff">
+    <circle cx="60"  cy="80"  r="1.4" opacity="0.8"/>
+    <circle cx="140" cy="130" r="1"   opacity="0.6"/>
+    <circle cx="210" cy="70"  r="1.6" opacity="0.85"/>
+    <circle cx="330" cy="110" r="1"   opacity="0.55"/>
+    <circle cx="470" cy="90"  r="1.5" opacity="0.8"/>
+    <circle cx="540" cy="150" r="1.1" opacity="0.6"/>
+    <circle cx="90"  cy="250" r="1.2" opacity="0.6"/>
+    <circle cx="520" cy="280" r="1.4" opacity="0.75"/>
+    <circle cx="50"  cy="430" r="1"   opacity="0.55"/>
+    <circle cx="560" cy="430" r="1.3" opacity="0.7"/>
+    <circle cx="110" cy="650" r="1.5" opacity="0.8"/>
+    <circle cx="250" cy="710" r="1.1" opacity="0.6"/>
+    <circle cx="380" cy="670" r="1.3" opacity="0.7"/>
+    <circle cx="500" cy="650" r="1"   opacity="0.55"/>
+    <circle cx="300" cy="610" r="1.2" opacity="0.6"/>
+    <circle cx="170" cy="200" r="1"   opacity="0.5"/>
+    <circle cx="430" cy="230" r="1.1" opacity="0.6"/>
+    <circle cx="280" cy="430" r="1"   opacity="0.5"/>
+    <circle cx="360" cy="360" r="1.2" opacity="0.6"/>
+    <circle cx="200" cy="500" r="1"   opacity="0.5"/>
+  </g>
+
+  <!-- ragyogó csillagok -->
+  <g fill="#ffffff" filter="url(#starGlow)">
+    <circle cx="205" cy="300" r="2.4" opacity="0.95"/>
+    <circle cx="400" cy="250" r="2"   opacity="0.85"/>
+    <circle cx="150" cy="560" r="2.2" opacity="0.9"/>
+    <circle cx="455" cy="540" r="2"   opacity="0.85"/>
+  </g>
+  <g fill="#f2e2bd" filter="url(#starGlow)">
+    <circle cx="320" cy="200" r="2.2" opacity="0.9"/>
+    <circle cx="300" cy="470" r="2.4" opacity="0.95"/>
+  </g>
+
+  <!-- csillag-szikrák -->
+  <g fill="#ffffff" opacity="0.95">
+    <path d="M205 288 L208 298 L218 301 L208 304 L205 314 L202 304 L192 301 L202 298 Z"/>
+    <path d="M300 458 L303.5 470 L316 474 L303.5 478 L300 490 L296.5 478 L284 474 L296.5 470 Z" fill="#f2e2bd"/>
+  </g>
+</svg>

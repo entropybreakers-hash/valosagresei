@@ -1,0 +1,673 @@
+/* =========================================================================
+   Valóság Résein — dizájn-rendszer
+   Hangulat: sötét, misztikus — mély éjkék, lila, halvány arany, csillagos
+   Képi világ: absztrakt, lágy gradiensek
+   Tipográfia: modern sans — Sora (display) + Inter (szöveg)
+   ========================================================================= */
+
+:root {
+  /* Szín */
+  --bg: #07061a;            /* mély éjkék-fekete */
+  --bg-2: #0c0a26;          /* enyhén világosabb */
+  --ink: #ece9f7;           /* lágy fehér szöveg */
+  --muted: rgba(236, 233, 247, 0.62);
+  --faint: rgba(236, 233, 247, 0.40);
+
+  --purple: #b7a6ff;        /* halvány lila accent */
+  --purple-soft: #d0c4ff;
+  --purple-deep: #9a83ff;
+  --gold: #e8cf9a;          /* halvány arany */
+  --gold-soft: #f2e2bd;
+  --gold-deep: #c9a45f;
+  --cream: #f5f1ff;         /* törtfehér a háttér-glow-hoz */
+
+  --glass: rgba(255, 255, 255, 0.045);
+  --glass-strong: rgba(255, 255, 255, 0.07);
+  --hairline: rgba(255, 255, 255, 0.09);
+  --gold-line: rgba(232, 207, 154, 0.28);
+
+  /* Forma */
+  --r-card: 18px;
+  --r-input: 14px;
+  --r-pill: 999px;
+
+  /* Árnyék / fény */
+  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.55);
+  --glow-purple: 0 14px 44px rgba(122, 92, 255, 0.40);
+  --glow-gold: 0 0 30px rgba(232, 207, 154, 0.25);
+
+  /* Mozgás */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===================== ABSZTRAKT HÁTTÉR ===================== */
+/* Aurora gradiens-foltok + finom csillagmező, fixen a háttérben */
+.bg-aurora,
+.bg-stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.bg-aurora {
+  background:
+    radial-gradient(38% 28% at 52% 6%, rgba(245, 241, 255, 0.10), transparent 72%),
+    radial-gradient(45% 40% at 18% 22%, rgba(150, 120, 255, 0.24), transparent 70%),
+    radial-gradient(40% 38% at 82% 30%, rgba(183, 166, 255, 0.20), transparent 70%),
+    radial-gradient(50% 45% at 60% 88%, rgba(232, 207, 154, 0.13), transparent 70%),
+    radial-gradient(60% 55% at 40% 60%, rgba(20, 16, 60, 0.55), transparent 75%);
+  filter: saturate(1.02);
+  animation: drift 24s ease-in-out infinite alternate;
+}
+
+.bg-stars {
+  z-index: -1;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 70% 20%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%, rgba(232, 207, 154, 0.7), transparent),
+    radial-gradient(1px 1px at 85% 60%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 55% 45%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 12% 80%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 90% 85%, rgba(185, 163, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 33% 12%, rgba(255, 255, 255, 0.5), transparent);
+  opacity: 0.7;
+}
+
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(0, -3%, 0) scale(1.08); }
+}
+
+/* ===================== TIPOGRÁFIA ===================== */
+.display {
+  font-family: "Sora", "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+h1.display { font-size: clamp(2.9rem, 8.5vw, 5.4rem); }
+h2.display { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 600; }
+
+.eyebrow {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* arany→lila színátmenetes kiemelés címszóhoz */
+.shimmer {
+  background: linear-gradient(100deg, var(--gold-soft), var(--purple-soft) 55%, var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.22rem);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+a { color: var(--gold); text-decoration: none; transition: color 0.2s var(--ease); }
+a:hover { color: var(--gold-soft); }
+
+/* ===================== LAYOUT ===================== */
+.wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: clamp(64px, 12vw, 130px) 0; position: relative; }
+.center { text-align: center; }
+
+/* ===================== GOMBOK ===================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 16px 34px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    border-color 0.25s var(--ease), color 0.25s var(--ease);
+  will-change: transform;
+}
+
+.btn-primary {
+  background: linear-gradient(115deg, var(--purple-deep), var(--purple) 60%, #b78bff);
+  color: #fff;
+  box-shadow: var(--glow-purple);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 54px rgba(122, 92, 255, 0.52);
+  color: #fff;
+}
+.btn-primary:disabled { opacity: 0.6; cursor: progress; transform: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--gold-line);
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+/* ===================== CHIP ===================== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--hairline);
+  background: var(--glass);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  backdrop-filter: blur(8px);
+}
+
+/* ===================== GLASS KÁRTYA ===================== */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  padding: 32px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-line);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  min-height: 94vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 64px; }
+}
+.hero h1 { margin: 20px 0 24px; }
+.hero .lead { max-width: 46ch; }
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 38px;
+  align-items: center;
+}
+.price-tag { font-size: 0.95rem; color: var(--faint); }
+
+/* Absztrakt "borító" — gradiens orb kompozíció */
+.orb-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  box-shadow: var(--shadow-lg), var(--glow-gold);
+  background: linear-gradient(160deg, #14103a, #07061a);
+}
+.orb-card img,
+.orb-card svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* lebegő animáció a borítónak */
+.float { animation: float 7s ease-in-out infinite; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ===================== RÁCS / FEATURE ===================== */
+.grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 760px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+.feature .icon { width: 42px; height: 42px; color: var(--gold); margin-bottom: 18px; }
+.feature h3 {
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.feature p { color: var(--muted); font-size: 0.98rem; }
+
+/* ===================== TARTALOMJEGYZÉK ===================== */
+.toc {
+  display: grid;
+  gap: 1px;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+.toc-item {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 24px 28px;
+  background: var(--glass);
+  transition: background 0.3s var(--ease);
+}
+.toc-item:hover { background: var(--glass-strong); }
+.toc-item .num {
+  font-family: "Sora", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold);
+  min-width: 2.4ch;
+}
+.toc-item h4 {
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+.toc-item p { color: var(--muted); font-size: 0.95rem; margin-top: 3px; }
+
+/* ===================== DIVIDER ===================== */
+.divider {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
+  margin: 0;
+}
+
+/* ===================== FINAL CTA ===================== */
+.cta-panel {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 130% at 50% 0%, rgba(122, 92, 255, 0.22), transparent 60%),
+    var(--glass);
+  border: 1px solid var(--gold-line);
+  border-radius: 28px;
+  padding: clamp(48px, 8vw, 92px) 32px;
+  backdrop-filter: blur(12px);
+}
+.cta-panel h2 { margin-bottom: 18px; }
+.cta-panel .lead { max-width: 48ch; margin: 0 auto 36px; }
+
+/* ===================== FOOTER ===================== */
+.footer {
+  padding: 56px 0;
+  border-top: 1px solid var(--hairline);
+  color: var(--faint);
+  font-size: 0.9rem;
+}
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===================== STÁTUSZ (success/cancel) ===================== */
+.status-shell { min-height: 100vh; display: grid; place-items: center; padding: 32px; }
+.status-box {
+  width: 100%;
+  max-width: 540px;
+  text-align: center;
+  background: var(--glass);
+  border: 1px solid var(--gold-line);
+  border-radius: 28px;
+  padding: clamp(40px, 7vw, 64px) clamp(28px, 6vw, 52px);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(14px);
+}
+.status-icon { width: 64px; height: 64px; margin: 0 auto 24px; color: var(--gold); }
+.status-box h1 { font-size: clamp(2rem, 6vw, 2.8rem); margin-bottom: 14px; }
+.status-box p { color: var(--muted); margin-bottom: 28px; }
+
+.spinner {
+  width: 40px; height: 40px; margin: 0 auto 24px;
+  border: 3px solid var(--hairline);
+  border-top-color: var(--purple);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hidden { display: none !important; }
+
+/* ===================== ENTRANCE ANIMÁCIÓ ===================== */
+.reveal { opacity: 0; transform: translateY(22px); animation: fadeUp 0.7s var(--ease) forwards; }
+.reveal.d1 { animation-delay: 0.10s; }
+.reveal.d2 { animation-delay: 0.20s; }
+.reveal.d3 { animation-delay: 0.30s; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; opacity: 1; transform: none; }
+  .bg-aurora, .float { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ===================== NAGY IDÉZET ===================== */
+.pullquote {
+  max-width: 22ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 4.5vw, 2.9rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.pullquote .mark {
+  display: block;
+  font-size: 3.4rem;
+  line-height: 0.6;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.pullquote cite {
+  display: block;
+  margin-top: 26px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ===================== OLVASS BELE (ízelítő) ===================== */
+.excerpt {
+  position: relative;
+  max-width: 640px;
+  margin: 36px auto 0;
+  padding: 40px clamp(24px, 5vw, 56px) 8px;
+  background: var(--glass);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  backdrop-filter: blur(10px);
+}
+.excerpt-prose {
+  font-family: "Sora", sans-serif;
+  font-weight: 300;
+  font-size: 1.12rem;
+  line-height: 1.85;
+  color: rgba(236, 233, 247, 0.82);
+  max-height: 260px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+}
+.excerpt-prose p { margin-bottom: 1.1em; }
+.excerpt-prose .drop::first-letter {
+  font-size: 3.1em;
+  float: left;
+  line-height: 0.82;
+  padding: 6px 12px 0 0;
+  color: var(--gold);
+  font-weight: 500;
+}
+.excerpt-cta { text-align: center; margin-top: 28px; }
+
+/* ===================== IDÉZETEK A KÖNYVBŐL ===================== */
+.quote-card {
+  position: relative;
+  padding-top: 44px;
+}
+.quote-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 6px;
+  left: 26px;
+  font-family: "Sora", serif;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.quote-card p {
+  font-family: "Sora", sans-serif;
+  font-weight: 300;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* ===================== SZERZŐ ===================== */
+.author {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+@media (min-width: 760px) {
+  .author { grid-template-columns: 220px 1fr; gap: 48px; }
+}
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  box-shadow: var(--glow-gold);
+  background:
+    radial-gradient(60% 60% at 40% 35%, rgba(183,166,255,0.6), transparent 70%),
+    radial-gradient(60% 60% at 70% 75%, rgba(232,207,154,0.45), transparent 70%),
+    #14103a;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.author h2 { margin-bottom: 16px; }
+.author p { color: var(--muted); margin-bottom: 14px; }
+.author .sign {
+  font-family: "Sora", sans-serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-top: 6px;
+}
+
+/* ===================== GYIK ===================== */
+.faq { max-width: 760px; margin: 40px auto 0; display: grid; gap: 12px; }
+.faq details {
+  background: var(--glass);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 4px 24px;
+  transition: border-color 0.3s var(--ease);
+}
+.faq details[open] { border-color: var(--gold-line); }
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 0;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  color: var(--gold);
+  font-size: 1.4rem;
+  transition: transform 0.3s var(--ease);
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p {
+  color: var(--muted);
+  padding: 0 0 20px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* ===================== BIZALMI JELEK ===================== */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 26px;
+  margin-top: 28px;
+}
+.trust span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--faint);
+}
+.trust svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
+
+/* ===================== FELIRATKOZÓ ŰRLAP (lead magnet) ===================== */
+.signup-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 500px;
+  margin-top: 32px;
+}
+.input {
+  flex: 1;
+  min-width: 220px;
+  padding: 16px 22px;
+  border-radius: var(--r-pill);
+  background: var(--glass-strong);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.input::placeholder { color: var(--faint); }
+.input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(232, 207, 154, 0.15);
+}
+.signup-form .btn-primary { flex-shrink: 0; }
+.form-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--faint);
+}
+.form-note svg { width: 15px; height: 15px; color: var(--gold); flex-shrink: 0; }
+.form-error {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  color: #ff9d9d;
+  min-height: 1.2em;
+}
+
+/* pipás lista */
+.checklist { display: grid; gap: 16px; margin-top: 8px; padding: 0; }
+.checklist li {
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+.checklist svg {
+  width: 22px; height: 22px;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.checklist strong { color: var(--ink); font-weight: 600; }
+
+/* "ingyenes" jelölő a borítón */
+.magnet-card { position: relative; }
+.magnet-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(115deg, var(--purple-deep), var(--purple));
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow: var(--glow-purple);
+}
+
+/* siker-állapot a feliratkozás után */
+.signup-success {
+  max-width: 500px;
+  margin-top: 24px;
+  padding: 32px;
+  background: var(--glass);
+  border: 1px solid var(--gold-line);
+  border-radius: var(--r-card);
+  backdrop-filter: blur(10px);
+}
+.signup-success .status-icon { width: 48px; height: 48px; margin: 0 0 16px; }
+.signup-success h3 {
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+.signup-success p { color: var(--muted); margin-bottom: 18px; }
+
+
