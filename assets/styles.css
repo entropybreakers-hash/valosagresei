@@ -397,3 +397,178 @@ a:hover { color: var(--gold-soft); }
   .bg-aurora, .float { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ===================== NAGY IDÉZET ===================== */
+.pullquote {
+  max-width: 22ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 4.5vw, 2.9rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.pullquote .mark {
+  display: block;
+  font-size: 3.4rem;
+  line-height: 0.6;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.pullquote cite {
+  display: block;
+  margin-top: 26px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ===================== OLVASS BELE (ízelítő) ===================== */
+.excerpt {
+  position: relative;
+  max-width: 640px;
+  margin: 36px auto 0;
+  padding: 40px clamp(24px, 5vw, 56px) 8px;
+  background: var(--glass);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  backdrop-filter: blur(10px);
+}
+.excerpt-prose {
+  font-family: "Sora", sans-serif;
+  font-weight: 300;
+  font-size: 1.12rem;
+  line-height: 1.85;
+  color: rgba(236, 233, 247, 0.82);
+  max-height: 260px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+}
+.excerpt-prose p { margin-bottom: 1.1em; }
+.excerpt-prose .drop::first-letter {
+  font-size: 3.1em;
+  float: left;
+  line-height: 0.82;
+  padding: 6px 12px 0 0;
+  color: var(--gold);
+  font-weight: 500;
+}
+.excerpt-cta { text-align: center; margin-top: 28px; }
+
+/* ===================== IDÉZETEK A KÖNYVBŐL ===================== */
+.quote-card {
+  position: relative;
+  padding-top: 44px;
+}
+.quote-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 6px;
+  left: 26px;
+  font-family: "Sora", serif;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.quote-card p {
+  font-family: "Sora", sans-serif;
+  font-weight: 300;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* ===================== SZERZŐ ===================== */
+.author {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+@media (min-width: 760px) {
+  .author { grid-template-columns: 220px 1fr; gap: 48px; }
+}
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--gold-line);
+  box-shadow: var(--glow-gold);
+  background:
+    radial-gradient(60% 60% at 40% 35%, rgba(183,166,255,0.6), transparent 70%),
+    radial-gradient(60% 60% at 70% 75%, rgba(232,207,154,0.45), transparent 70%),
+    #14103a;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.author h2 { margin-bottom: 16px; }
+.author p { color: var(--muted); margin-bottom: 14px; }
+.author .sign {
+  font-family: "Sora", sans-serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-top: 6px;
+}
+
+/* ===================== GYIK ===================== */
+.faq { max-width: 760px; margin: 40px auto 0; display: grid; gap: 12px; }
+.faq details {
+  background: var(--glass);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 4px 24px;
+  transition: border-color 0.3s var(--ease);
+}
+.faq details[open] { border-color: var(--gold-line); }
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 0;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  color: var(--gold);
+  font-size: 1.4rem;
+  transition: transform 0.3s var(--ease);
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p {
+  color: var(--muted);
+  padding: 0 0 20px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* ===================== BIZALMI JELEK ===================== */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 26px;
+  margin-top: 28px;
+}
+.trust span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--faint);
+}
+.trust svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
+
