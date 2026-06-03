@@ -1,0 +1,26 @@
+# =========================================================================
+# Valóság Résein — Cloudflare Worker konfiguráció
+# Telepítés: lásd a repo gyökerében lévő README.md "Worker" szakaszát.
+# =========================================================================
+name = "valosagresei-shop"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# --- R2 bucket kötés (ide kerül a privát PDF) ---
+[[r2_buckets]]
+binding = "BOOK_BUCKET"
+bucket_name = "valosagresei-ebook"
+
+# --- Nem titkos beállítások ---
+# A SITE_URL és ALLOWED_ORIGIN a saját domainod legyen (éles), pl. https://valosagresei.com
+[vars]
+SITE_URL = "https://valosagresei.com"
+ALLOWED_ORIGIN = "https://valosagresei.com"
+EBOOK_KEY = "valosag-resein.pdf"
+EBOOK_FILENAME = "Valosag-Resein.pdf"
+
+# --- Titkok (NE ide írd őket!) ---
+# Ezeket a `wrangler secret put NÉV` paranccsal állítsd be:
+#   wrangler secret put STRIPE_SECRET_KEY
+#   wrangler secret put STRIPE_PRICE_ID
+#   wrangler secret put DOWNLOAD_SECRET

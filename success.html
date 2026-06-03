@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Köszönjük! — Valóság Résein</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <main class="status-shell">
+    <div class="status-box">
+
+      <!-- 1) Betöltés / ellenőrzés -->
+      <div id="loading">
+        <div class="spinner"></div>
+        <h1 class="display">Fizetés ellenőrzése…</h1>
+        <p>Egy pillanat, megerősítjük a vásárlást és előkészítjük a letöltést.</p>
+      </div>
+
+      <!-- 2) Siker -->
+      <div id="ready" class="hidden">
+        <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 12l3 3 5-6" />
+        </svg>
+        <h1 class="display">Köszönjük!</h1>
+        <p>A vásárlás sikeres. A letöltés alább érhető el — a link rövid ideig él, ezért érdemes most letölteni.</p>
+        <a id="download-link" class="btn btn-primary" href="#" download>Ebook letöltése</a>
+        <p style="margin-top:24px; font-size:0.85rem">
+          A linket emailben is elküldtük. Gond esetén írj:
+          <a href="mailto:hello@valosagresei.com">hello@valosagresei.com</a>
+        </p>
+      </div>
+
+      <!-- 3) Hiba -->
+      <div id="error" class="hidden">
+        <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 8v5M12 16h.01" />
+        </svg>
+        <h1 class="display">Hmm…</h1>
+        <p id="error-msg">Nem sikerült megerősíteni a fizetést. Ha levontuk az összeget, kérlek írj nekünk és azonnal elküldjük az ebookot.</p>
+        <a class="btn btn-ghost" href="mailto:hello@valosagresei.com">Írok egy emailt</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="assets/config.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var sessionId = params.get("session_id");
+      var cfg = window.VR_CONFIG || {};
+
+      var loading = document.getElementById("loading");
+      var ready = document.getElementById("ready");
+      var error = document.getElementById("error");
+
+      function show(el) {
+        [loading, ready, error].forEach(function (n) { n.classList.add("hidden"); });
+        el.classList.remove("hidden");
+      }
+
+      if (!sessionId) {
+        show(error);
+        return;
+      }
+
+      fetch(
+        cfg.WORKER_URL.replace(/\/$/, "") +
+          "/api/download?session_id=" +
+          encodeURIComponent(sessionId)
+      )
+        .then(function (r) {
+          if (!r.ok) throw new Error("download " + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          if (data && data.url) {
+            document.getElementById("download-link").href = data.url;
+            show(ready);
+          } else {
+            throw new Error("nincs url");
+          }
+        })
+        .catch(function (err) {
+          console.error(err);
+          show(error);
+        });
+    })();
+  </script>
+</body>
+</html>

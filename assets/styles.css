@@ -1,0 +1,464 @@
+/* =========================================================================
+   Valóság Résein — dizájn-rendszer
+   Tipográfia: Cormorant Garamond (display) + DM Sans (body)
+   Szín: mély fekete bg / krém szöveg + egyetlen narancs accent
+   ========================================================================= */
+
+:root {
+  /* Szín — max 3 */
+  --ink: #faf8f3;            /* krém szöveg sötét háttéren */
+  --bg: #0a0806;             /* mély fekete háttér */
+  --bg-soft: #14110d;        /* alig világosabb panel */
+  --accent: #ff7a2e;         /* élénk narancs */
+  --accent-deep: #d14a00;    /* sötétebb narancs */
+  --muted: rgba(250, 248, 243, 0.62);
+  --hairline: rgba(250, 248, 243, 0.10);
+
+  /* Forma */
+  --r-card: 16px;
+  --r-input: 14px;
+  --r-pill: 999px;
+
+  /* Árnyék */
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --glow: 0 10px 30px rgba(255, 122, 46, 0.28);
+
+  /* Mozgás */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Tipográfia */
+.display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+h1.display {
+  font-size: clamp(2.8rem, 8vw, 5.2rem);
+}
+
+h2.display {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 500;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+
+a:hover {
+  color: var(--accent-deep);
+}
+
+/* Layout */
+.wrap {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: clamp(64px, 12vw, 128px) 0;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Gombok */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  padding: 16px 36px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease), color 0.25s var(--ease);
+  will-change: transform;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #1a0d03;
+  box-shadow: var(--glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(255, 122, 46, 0.38);
+  color: #1a0d03;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--hairline);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Chip / pill */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--hairline);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* Kártya */
+.card {
+  background: var(--bg-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-card);
+  padding: 32px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 880px) {
+  .hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+  }
+}
+
+.hero h1 {
+  margin: 18px 0 22px;
+}
+
+.hero .lead {
+  max-width: 46ch;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+  align-items: center;
+}
+
+.price-tag {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.price-tag strong {
+  color: var(--ink);
+  font-size: 1.15rem;
+}
+
+/* Borító */
+.cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--hairline);
+  background: linear-gradient(160deg, #1b1610, #0a0806);
+}
+
+.cover img,
+.cover svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Feature rács */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 720px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.feature .icon {
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.feature h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.feature p {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+/* Tartalomjegyzék */
+.toc {
+  display: grid;
+  gap: 2px;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+
+.toc-item {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 22px 28px;
+  background: var(--bg-soft);
+}
+
+.toc-item .num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+  min-width: 2ch;
+}
+
+.toc-item h4 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.toc-item p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--hairline);
+  border: 0;
+  margin: 0;
+}
+
+/* Footer */
+.footer {
+  padding: 56px 0;
+  border-top: 1px solid var(--hairline);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Final CTA panel */
+.cta-panel {
+  text-align: center;
+  background: radial-gradient(
+      120% 140% at 50% 0%,
+      rgba(255, 122, 46, 0.14),
+      transparent 60%
+    ),
+    var(--bg-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: clamp(48px, 8vw, 88px) 32px;
+}
+
+.cta-panel h2 {
+  margin-bottom: 18px;
+}
+
+.cta-panel .lead {
+  max-width: 48ch;
+  margin: 0 auto 36px;
+}
+
+/* Státusz-doboz (success / cancel) */
+.status-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.status-box {
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  background: var(--bg-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 24px;
+  padding: clamp(40px, 7vw, 64px) clamp(28px, 6vw, 52px);
+  box-shadow: var(--shadow-lg);
+}
+
+.status-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px;
+  color: var(--accent);
+}
+
+.status-box h1 {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  margin-bottom: 14px;
+}
+
+.status-box p {
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 24px;
+  border: 3px solid var(--hairline);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Entrance animáció */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s var(--ease) forwards;
+}
+
+.reveal.d1 { animation-delay: 0.08s; }
+.reveal.d2 { animation-delay: 0.16s; }
+.reveal.d3 { animation-delay: 0.24s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
