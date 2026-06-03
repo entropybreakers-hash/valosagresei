@@ -1,5 +1,5 @@
 /* =========================================================================
-   Valóság Résein — kassza-indítás
+   Valóság Rései — kassza-indítás
    A "Megszerzem" gombra kattintva a Worker létrehoz egy Stripe Checkout
    munkamenetet, és átirányít a Stripe biztonságos fizetőoldalára.
    ========================================================================= */

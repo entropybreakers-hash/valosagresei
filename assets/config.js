@@ -1,5 +1,5 @@
 /* =========================================================================
-   Valóság Résein — kliens-oldali konfiguráció
+   Valóság Rései — kliens-oldali konfiguráció
    Itt állítsd be a Worker címét és az árat. Más fájlt nem kell módosítani.
    ========================================================================= */
 window.VR_CONFIG = {
@@ -13,5 +13,5 @@ window.VR_CONFIG = {
   PRICE_LABEL: "4 990 Ft",
 
   // Az ebook címe — több helyen használjuk.
-  BOOK_TITLE: "Valóság Résein",
+  BOOK_TITLE: "Valóság Rései",
 };

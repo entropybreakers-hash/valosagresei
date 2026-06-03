@@ -1,5 +1,5 @@
 /* =========================================================================
-   Valóság Résein — Cloudflare Worker (kassza + biztonságos letöltés)
+   Valóság Rései — Cloudflare Worker (kassza + biztonságos letöltés)
 
    Végpontok:
      POST /api/checkout            → Stripe Checkout munkamenet létrehozása
@@ -116,7 +116,7 @@ async function handleFile(env, url) {
     return new Response("Az ebook jelenleg nem elérhető.", { status: 404 });
   }
 
-  const filename = env.EBOOK_FILENAME || "valosag-resein.pdf";
+  const filename = env.EBOOK_FILENAME || "valosag-resei.pdf";
   return new Response(object.body, {
     headers: {
       "Content-Type": "application/pdf",

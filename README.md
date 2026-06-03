@@ -1,4 +1,4 @@
-# Valóság Résein — ebook oldal
+# Valóság Rései — ebook oldal
 
 Spirituális ebook eladó oldal: szép, statikus landing oldal (GitHub Pages) +
 Stripe fizetés + **automatikus, biztonságos letöltés** fizetés után (Cloudflare
@@ -48,14 +48,14 @@ valosagresei/
 
 ### 1. Stripe — termék és ár
 1. Stripe Dashboard → **Products** → *Add product*.
-2. Név: „Valóság Résein – ebook”, ár: pl. **4990 HUF**, egyszeri fizetés.
+2. Név: „Valóság Rései – ebook”, ár: pl. **4990 HUF**, egyszeri fizetés.
 3. Mentés után másold ki a **Price ID**-t (így néz ki: `price_123…`).
 4. Developers → API keys → másold a **Secret key**-t (`sk_live_…` vagy
    teszteléshez `sk_test_…`).
 
 ### 2. Cloudflare R2 — a privát PDF tárolása
 1. Cloudflare Dashboard → **R2** → *Create bucket*, név: `valosagresei-ebook`.
-2. Töltsd fel a kész PDF-et **`valosag-resein.pdf`** néven (vagy állítsd át az
+2. Töltsd fel a kész PDF-et **`valosag-resei.pdf`** néven (vagy állítsd át az
    `EBOOK_KEY`-t a `worker/wrangler.toml`-ban).
    > A bucket maradjon **privát** — ne adj neki nyilvános hozzáférést.
 
@@ -92,7 +92,7 @@ Nyisd meg `assets/config.js`-t, és írd be a Worker URL-jét:
 window.VR_CONFIG = {
   WORKER_URL: "https://valosagresei-shop.<felhasznalonev>.workers.dev",
   PRICE_LABEL: "4 990 Ft",
-  BOOK_TITLE: "Valóság Résein",
+  BOOK_TITLE: "Valóság Rései",
 };
 ```
 

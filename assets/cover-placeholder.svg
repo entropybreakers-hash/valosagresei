@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Valóság Résein — absztrakt borító">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Valóság Rései — absztrakt borító">
   <defs>
     <radialGradient id="orb1" cx="35%" cy="30%" r="60%">
-      <stop offset="0" stop-color="#b9a3ff"/>
-      <stop offset="55%" stop-color="#6f4bff"/>
+      <stop offset="0" stop-color="#d6ccff"/>
+      <stop offset="55%" stop-color="#9a83ff"/>
       <stop offset="100%" stop-color="#1a1140" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="orb2" cx="70%" cy="72%" r="55%">
@@ -39,6 +39,6 @@
   </g>
 
   <text x="300" y="395" text-anchor="middle" fill="#f4f1ff" font-family="'Sora', 'Inter', sans-serif" font-size="50" font-weight="600" letter-spacing="-1">Valóság</text>
-  <text x="300" y="452" text-anchor="middle" fill="#f4f1ff" font-family="'Sora', 'Inter', sans-serif" font-size="50" font-weight="600" letter-spacing="-1">Résein</text>
+  <text x="300" y="452" text-anchor="middle" fill="#f4f1ff" font-family="'Sora', 'Inter', sans-serif" font-size="50" font-weight="600" letter-spacing="-1">Rései</text>
   <text x="300" y="730" text-anchor="middle" fill="#e8cf9a" font-family="'Inter', sans-serif" font-size="14" letter-spacing="7">EBOOK</text>
 </svg>

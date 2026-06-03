@@ -1,5 +1,5 @@
 # =========================================================================
-# Valóság Résein — Cloudflare Worker konfiguráció
+# Valóság Rései — Cloudflare Worker konfiguráció
 # Telepítés: lásd a repo gyökerében lévő README.md "Worker" szakaszát.
 # =========================================================================
 name = "valosagresei-shop"
@@ -16,8 +16,8 @@ bucket_name = "valosagresei-ebook"
 [vars]
 SITE_URL = "https://valosagresei.com"
 ALLOWED_ORIGIN = "https://valosagresei.com"
-EBOOK_KEY = "valosag-resein.pdf"
-EBOOK_FILENAME = "Valosag-Resein.pdf"
+EBOOK_KEY = "valosag-resei.pdf"
+EBOOK_FILENAME = "Valosag-Resei.pdf"
 
 # --- Titkok (NE ide írd őket!) ---
 # Ezeket a `wrangler secret put NÉV` paranccsal állítsd be:

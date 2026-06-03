@@ -13,12 +13,13 @@
   --muted: rgba(236, 233, 247, 0.62);
   --faint: rgba(236, 233, 247, 0.40);
 
-  --purple: #9a7cff;        /* lila accent */
-  --purple-soft: #b9a3ff;
-  --purple-deep: #6f4bff;
+  --purple: #b7a6ff;        /* halvány lila accent */
+  --purple-soft: #d0c4ff;
+  --purple-deep: #9a83ff;
   --gold: #e8cf9a;          /* halvány arany */
   --gold-soft: #f2e2bd;
   --gold-deep: #c9a45f;
+  --cream: #f5f1ff;         /* törtfehér a háttér-glow-hoz */
 
   --glass: rgba(255, 255, 255, 0.045);
   --glass-strong: rgba(255, 255, 255, 0.07);
@@ -77,11 +78,12 @@ body {
 
 .bg-aurora {
   background:
-    radial-gradient(45% 40% at 18% 22%, rgba(111, 75, 255, 0.34), transparent 70%),
-    radial-gradient(40% 38% at 82% 30%, rgba(154, 124, 255, 0.26), transparent 70%),
-    radial-gradient(50% 45% at 60% 88%, rgba(232, 207, 154, 0.14), transparent 70%),
-    radial-gradient(60% 55% at 40% 60%, rgba(20, 16, 60, 0.6), transparent 75%);
-  filter: saturate(1.05);
+    radial-gradient(38% 28% at 52% 6%, rgba(245, 241, 255, 0.10), transparent 72%),
+    radial-gradient(45% 40% at 18% 22%, rgba(150, 120, 255, 0.24), transparent 70%),
+    radial-gradient(40% 38% at 82% 30%, rgba(183, 166, 255, 0.20), transparent 70%),
+    radial-gradient(50% 45% at 60% 88%, rgba(232, 207, 154, 0.13), transparent 70%),
+    radial-gradient(60% 55% at 40% 60%, rgba(20, 16, 60, 0.55), transparent 75%);
+  filter: saturate(1.02);
   animation: drift 24s ease-in-out infinite alternate;
 }
 
